@@ -1,0 +1,41 @@
+# Optimized configuration of dual-track rules
+# Rely only on the dual-track system for rule optimization
+
+# Basic training configuration
+training:
+  enable_rule_optimization: true
+
+# Dual-track system configuration
+dual_track:
+  # First stage configuration
+  stage1:
+    min_epochs_between_analysis: 3
+    min_batches_for_evaluation: 50
+    health_threshold: 0.4
+    effectiveness_threshold: 0.3
+    max_optimization_attempts: 3
+    enable_automatic_optimization: true
+
+  # Second stage configuration
+  stage2:
+    # Whether to enable the second phaseAPIoptimization
+    enable_stage2_processing: false  # set totrueenable realAPIoptimization
+    api_endpoint: "https://api.chatanywhere.tech/v1/chat/completions"
+    api_timeout: 30
+    max_retries: 3
+    require_human_approval: false
+    enable_rollback: true
+
+# Log configuration
+logging:
+  enable_detailed_logging: true
+  log_optimization_decisions: true
+  log_api_calls: true
+
+# Usage scenarios：
+#
+# scene1：Analyze only，Not optimized（default）
+# stage2.enable_stage2_processing: false
+#
+# scene2：Complete optimization（IncludeAPIcall）
+# stage2.enable_stage2_processing: true

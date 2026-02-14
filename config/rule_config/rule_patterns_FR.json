@@ -1,0 +1,121 @@
+{
+  "rule_patterns": {
+    "0": {
+      "description": "When system_load_forecast increases, electricity prices tend to increase due to higher demand pressure on the electricity grid",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "System load forecast",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "1": {
+      "description": "When generation_forecast increases, electricity prices tend to decrease as more power supply enters the grid",
+      "direction": -1.0,
+      "direction_description": "Negative impact - price decrease",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "Generation forecast",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "negative"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "2": {
+      "description": "During peak demand hours (typically morning and evening), electricity prices are generally higher due to increased consumption",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "peak_hours",
+          "hours": [7, 8, 9, 18, 19, 20, 21],
+          "peak_context": "morning_evening"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "3": {
+      "description": "On weekends, electricity prices tend to be lower due to reduced industrial and commercial activity",
+      "direction": -1.0,
+      "direction_description": "Negative impact - price decrease",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "weekend",
+          "weekdays": [5, 6],
+          "weekend_context": "reduced_activity"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "4": {
+      "description": "During summer months, electricity prices tend to increase due to air conditioning demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [6, 7, 8],
+          "seasonal_context": "summer"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "5": {
+      "description": "During winter months, electricity prices tend to increase due to heating demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [12, 1, 2],
+          "seasonal_context": "winter"
+        }
+      },
+      "category": "temporal_pattern"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2025-09-01",
+    "description": "Pattern features and directional configuration for electricity price prediction rules (FR dataset)",
+    "dataset": "FR.csv",
+    "total_rules": 6,
+    "categories": {
+      "trend_driven": "Trend-driven rules (based on exogenous variable trend changes)",
+      "temporal_pattern": "Temporal pattern rules (including hourly, weekend, seasonal patterns)"
+    },
+    "direction_mapping": {
+      "1.0": "Positive impact - leads to price increase",
+      "-1.0": "Negative impact - leads to price decrease",
+      "0.0": "Neutral impact - unclear impact on price"
+    },
+    "exog_variables": {
+      "Generation forecast": "Generation forecast - electricity supply forecast",
+      "System load forecast": "System load forecast - electricity demand forecast"
+    },
+    "last_updated": "2025-09-01T00:00:00.000000",
+    "last_updated_rule": 5
+  },
+  "validation": {
+    "required_fields": [
+      "description",
+      "direction",
+      "pattern_features"
+    ],
+    "direction_range": [
+      -1.0,
+      1.0
+    ],
+    "confidence_range": [
+      0.0,
+      1.0
+    ]
+  }
+}

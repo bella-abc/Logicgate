@@ -1,0 +1,167 @@
+{
+  "rule_patterns": {
+    "0": {
+      "description": "When dry bulb temperature increases, wet bulb temperature tends to increase",
+      "direction": 1.0,
+      "direction_description": "Positive impact - wet bulb temperature increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "T",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "1": {
+      "description": "When dew point temperature increases, wet bulb temperature tends to increase",
+      "direction": 1.0,
+      "direction_description": "Positive impact - The temperature of the wet ball is rising dramatically.",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "Tdew",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "4": {
+      "description": "When actual vapor pressure increases, wet bulb temperature tends to increase",
+      "direction": 1.0,
+      "direction_description": "Positive impact - wet bulb temperature increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "VPact",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "8": {
+      "description": "When atmospheric pressure decreases, wet bulb temperature tends to decrease",
+      "direction": -1.0,
+      "direction_description": "Negative impact - wet bulb temperature slight decrease",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "p",
+          "trend": "decreasing",
+          "adaptive_threshold": true,
+          "impact_direction": "negative"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "12": {
+      "description": "When specific humidity increases, wet bulb temperature tends to increase",
+      "direction": 1.0,
+      "direction_description": "Positive impact - wet bulb temperature increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "sh",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "13": {
+      "description": "When maximum vapor pressure increases, wet bulb temperature tends to increase",
+      "direction": 1.0,
+      "direction_description": "Positive impact - wet bulb temperature increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "VPmax",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2025-01-12",
+    "description": "Pattern features and directional configuration for wet bulb temperature prediction rules (weather_cleaned dataset)",
+    "dataset": "weather_cleaned.csv",
+    "target_variable": "wet bulb",
+    "total_rules": 6,
+    "categories": {
+      "trend_driven": "Trends-driven rules（Trends based on variables）",
+      "threshold_driven": "Threshold driver rule（Based on a specific threshold condition）",
+      "range_driven": "Scope-driven rules（Based on specific range of values）",
+      "combined_effect": "Combination effect rules（Multivariant synergies）"
+    },
+    "direction_mapping": {
+      "1.0": "Positive impact - It's causing the wet ball temperature to rise.",
+      "-1.0": "Negative impact - It causes the temperature of the wet ball to drop.",
+      "0.0": "Neutral effects - The effect on the temperature of the wet ball is unclear."
+    },
+    "primary_variables": {
+      "T": "Dry ball temperature - Basic reference value for wet ball temperature",
+      "Tdew": "Show some temperature - Direct indicator of absolute humidity",
+      "rh": "Relative humidity - Key factors affecting the evaporation cooling effect",
+      "VPact": "Actual water vapour - Actual vapour content in air",
+      "VPdef": "Water pressure differential - evaporation driver indicator",
+      "wv": "Wind speed - Impact heat transfer and evaporation efficiency",
+      "p": "Atmospheric pressure - Impact evaporation conditions",
+      "sh": "Humidity - Another expression of absolute humidity",
+      "VPmax": "Maximum water pressure - Saturation water vapour limit"
+    },
+    "secondary_variables": {
+      "Tpot": "Temperature - Indirect temperature indicator",
+      "H2OC": "Water vapour concentration - Another expression of humidity",
+      "rho": "Air density - Impact heat transfer efficiency",
+      "max. wv": "Maximum Wind Speed - Extreme wind condition indicator",
+      "wd": "Wind direction - Wet ball temperature is less affected",
+      "rain": "Rainfall - Indirect effects through humidity",
+      "raining": "Raintime - Impact of continuous humidity",
+      "SWDR": "Shortwave radiation - Indirectly by temperature",
+      "PAR": "Photolytic active radiation - Indicators of light intensity",
+      "max. PAR": "Maximum photolytic active radiation - Extreme indicators",
+      "Tlog": "Record temperature - Another record of temperature.",
+      "date": "Time - Time series baseline"
+    },
+    "impact_strength_ranking": [
+      "rh",
+      "T", 
+      "Tdew",
+      "VPact",
+      "VPdef", 
+      "wv",
+      "sh",
+      "VPmax",
+      "p"
+    ],
+    "last_updated": "2025-01-12T00:00:00.000000",
+    "last_updated_rule": 5
+  },
+  "validation": {
+    "required_fields": [
+      "description",
+      "direction",
+      "pattern_features"
+    ],
+    "direction_range": [
+      -1.0,
+      1.0
+    ],
+    "confidence_range": [
+      0.0,
+      1.0
+    ],
+    "supported_pattern_types": [
+      "trend_pattern",
+      "threshold_pattern", 
+      "range_pattern",
+      "combined_threshold_pattern",
+      "trend_patterns"
+    ]
+  }
+}

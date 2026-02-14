@@ -1,0 +1,82 @@
+{
+  "api": {
+    "base_url": "https://api.chatanywhere.tech/v1/chat/completions",
+    "model_name": "gpt-4o-mini",
+    "max_tokens": 2048,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "timeout": 30,
+    "retry_attempts": 3,
+    "retry_delay": 1.0
+  },
+  "thresholds": {
+    "health_threshold": 0.4,
+    "effectiveness_threshold": 0.3,
+    "performance_degradation": 0.05,
+    "minimum_confidence": 0.6,
+    "critical_health_threshold": 0.2,
+    "high_priority_threshold": 0.3
+  },
+  "strategies": {
+    "immediate_threshold": 0.2,
+    "gradual_threshold": 0.4,
+    "ab_test_threshold": 0.6,
+    "replacement_strategy": {
+      "immediate": {
+        "rollback_threshold": 0.1,
+        "monitoring_duration": 24,
+        "validation_required": true
+      },
+      "gradual": {
+        "phases": [
+          {"duration": 24, "traffic_ratio": 0.1},
+          {"duration": 24, "traffic_ratio": 0.5},
+          {"duration": 24, "traffic_ratio": 1.0}
+        ],
+        "rollback_threshold": 0.05,
+        "phase_success_criteria": "no_performance_degradation"
+      },
+      "ab_test": {
+        "test_duration": 72,
+        "test_ratio": 0.3,
+        "significance_level": 0.05,
+        "minimum_sample_size": 1000
+      }
+    }
+  },
+  "optimization": {
+    "analysis_interval_epochs": 1,
+    "min_epochs_before_analysis": 1,
+    "max_concurrent_optimizations": 1,
+    "enable_automatic_optimization": false,
+    "backup_retention_days": 30,
+    "max_optimization_attempts": 3
+  },
+  "validation": {
+    "tolerance_thresholds": {
+      "mse_degradation": 0.05,
+      "mae_degradation": 0.03,
+      "r2_degradation": 0.02,
+      "rule_usage_change": 0.1
+    },
+    "monitoring_duration": 60,
+    "validation_sample_size": 100
+  },
+  "logging": {
+    "level": "INFO",
+    "enable_detailed_logging": true,
+    "log_api_calls": true,
+    "log_performance_metrics": true
+  },
+  "security": {
+    "api_key_env_var": "OPENAI_API_KEY",
+    "required_env_vars": ["OPENAI_API_KEY"],
+    "enable_ssl_verification": true
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2024-01-15",
+    "description": "Dual-track rules optimization system configuration file",
+    "last_updated": "2024-01-15"
+  }
+}

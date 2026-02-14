@@ -1,0 +1,184 @@
+{
+  "rule_patterns": {
+    "0": {
+      "description": "When HUFL (High UseFul Load) increases, OT tends to increase due to higher energy consumption demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "HUFL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "1": {
+      "description": "When HULL (High UseLess Load) increases, OT tends to increase due to overall system load pressure",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "HULL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "2": {
+      "description": "When MUFL (Middle UseFul Load) increases, OT tends to increase reflecting moderate demand pressure",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "MUFL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "3": {
+      "description": "When MULL (Middle UseLess Load) increases, OT tends to increase due to system inefficiency",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "MULL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "4": {
+      "description": "When LUFL (Low UseFul Load) increases, OT tends to increase reflecting base load demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "LUFL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "5": {
+      "description": "When LULL (Low UseLess Load) increases, OT tends to increase due to system baseline inefficiency",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "LULL",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "6": {
+      "description": "During peak demand hours (typically morning and evening), OT is generally higher due to increased consumption",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "peak_hours",
+          "hours": [7, 8, 9, 18, 19, 20, 21],
+          "peak_context": "morning_evening"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "7": {
+      "description": "On weekends, OT tends to be lower due to reduced overall activity and demand",
+      "direction": -1.0,
+      "direction_description": "Negative impact - OT decrease",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "weekend",
+          "weekdays": [5, 6],
+          "weekend_context": "reduced_activity"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "8": {
+      "description": "During winter months, OT tends to be higher due to heating demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [12, 1, 2],
+          "seasonal_context": "winter"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "9": {
+      "description": "During summer months, OT tends to be higher due to cooling demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - OT increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [6, 7, 8],
+          "seasonal_context": "summer"
+        }
+      },
+      "category": "temporal_pattern"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2025-01-27",
+    "description": "Pattern features and directional configuration for OT prediction rules (ETTh1 dataset)",
+    "dataset": "ETTh1.csv",
+    "total_rules": 10,
+    "categories": {
+      "trend_driven": "Trend-driven rules (based on exogenous variable trend changes)",
+      "temporal_pattern": "Temporal pattern rules (including hourly, weekend, seasonal patterns)"
+    },
+    "direction_mapping": {
+      "1.0": "Positive impact - leads to OT increase",
+      "-1.0": "Negative impact - leads to OT decrease",
+      "0.0": "Neutral impact - unclear impact on OT"
+    },
+    "exog_variables": {
+      "HUFL": "High UseFul Load - high useful load",
+      "HULL": "High UseLess Load - high useless load", 
+      "MUFL": "Middle UseFul Load - middle useful load",
+      "MULL": "Middle UseLess Load - middle useless load",
+      "LUFL": "Low UseFul Load - low useful load",
+      "LULL": "Low UseLess Load - low useless load"
+    },
+    "target_variable": {
+      "OT": "Oil Temperature - transformer oil temperature (target variable)"
+    },
+    "last_updated": "2025-01-27T00:00:00.000000",
+    "last_updated_rule": 9
+  },
+  "validation": {
+    "required_fields": [
+      "description",
+      "direction",
+      "pattern_features"
+    ],
+    "direction_range": [
+      -1.0,
+      1.0
+    ],
+    "confidence_range": [
+      0.0,
+      1.0
+    ]
+  }
+}

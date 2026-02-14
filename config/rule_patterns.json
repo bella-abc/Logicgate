@@ -1,0 +1,117 @@
+{
+  "rule_patterns": {
+    "0": {
+      "description": "When grid_load increases, electricity prices tend to increase due to higher demand pressure on the electricity grid",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "grid_load",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "positive"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "1": {
+      "description": "When wind_power increases, electricity prices tend to decrease as more renewable energy enters the grid at lower marginal costs",
+      "direction": -1.0,
+      "direction_description": "Negative impact - price decrease",
+      "pattern_features": {
+        "trend_pattern": {
+          "variable": "wind_power",
+          "trend": "increasing",
+          "adaptive_threshold": true,
+          "impact_direction": "negative"
+        }
+      },
+      "category": "trend_driven"
+    },
+    "2": {
+      "description": "During peak demand hours (typically morning and evening), electricity prices are generally higher due to increased consumption",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "peak_hours",
+          "hours": [7, 8, 9, 18, 19, 20, 21],
+          "peak_context": "morning_evening"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "3": {
+      "description": "On weekends, electricity prices tend to be lower due to reduced industrial and commercial activity",
+      "direction": -1.0,
+      "direction_description": "Negative impact - price decrease",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "weekend",
+          "weekdays": [5, 6],
+          "weekend_context": "reduced_activity"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "4": {
+      "description": "During summer months, electricity prices tend to increase due to air conditioning demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [6, 7, 8],
+          "seasonal_context": "summer"
+        }
+      },
+      "category": "temporal_pattern"
+    },
+    "5": {
+      "description": "During winter months, electricity prices tend to increase due to heating demand",
+      "direction": 1.0,
+      "direction_description": "Positive impact - price increase",
+      "pattern_features": {
+        "time_pattern": {
+          "type": "seasonal",
+          "months": [12, 1, 2],
+          "seasonal_context": "winter"
+        }
+      },
+      "category": "temporal_pattern"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2024-01-15",
+    "description": "Pattern features and directional configuration for electricity price prediction rules",
+    "total_rules": 7,
+    "categories": {
+      "trend_driven": "Trend-driven rules (based on exogenous variable trend changes)",
+      "temporal_pattern": "Temporal pattern rules (including hourly, weekend, seasonal patterns)",
+      "combined_effect": "Combined effect rules"
+    },
+    "direction_mapping": {
+      "1.0": "Positive impact - causes price increase",
+      "-1.0": "Negative impact - causes price decrease",
+      "0.0": "Neutral impact - unclear effect on price"
+    },
+    "last_updated": "2025-08-20T16:10:00.000000",
+    "last_updated_rule": 6
+  },
+  "validation": {
+    "required_fields": [
+      "description",
+      "direction",
+      "pattern_features"
+    ],
+    "direction_range": [
+      -1.0,
+      1.0
+    ],
+    "confidence_range": [
+      0.0,
+      1.0
+    ]
+  }
+}
